@@ -7,12 +7,17 @@ public class ShieldPlayer : MonoBehaviour
     [SerializeField] private KeyCode shieldKey = KeyCode.Q;
     [SerializeField] private float shieldDurationSeconds = 5f;
 
+    [Header("Shield Visual")]
+    [SerializeField] private Material shieldMaterial;
+
     [Header("Enemy Filter")]
     [SerializeField] private string enemyTagLowercase = "enemy";
     [SerializeField] private string enemyTagUppercase = "Enemy";
 
     private PlayerDamageReceiver damageReceiver;
     private Collider2D[] playerColliders;
+    private MeshRenderer[] meshRenderers;
+    private Material[] originalMaterials;
 
     private bool shieldActive;
     private float shieldUntil;
@@ -25,10 +30,29 @@ public class ShieldPlayer : MonoBehaviour
 
     private readonly System.Collections.Generic.List<IgnoredPair> ignoredPairs = new System.Collections.Generic.List<IgnoredPair>(32);
 
+    private void CacheRenderers()
+    {
+        meshRenderers = GetComponentsInChildren<MeshRenderer>(includeInactive: false);
+
+        if (meshRenderers == null || meshRenderers.Length == 0)
+        {
+            originalMaterials = null;
+            return;
+        }
+
+        originalMaterials = new Material[meshRenderers.Length];
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            var r = meshRenderers[i];
+            originalMaterials[i] = r != null ? r.material : null;
+        }
+    }
+
     private void Awake()
     {
         damageReceiver = GetComponent<PlayerDamageReceiver>();
         playerColliders = GetComponentsInChildren<Collider2D>(includeInactive: false);
+        CacheRenderers();
 
         if (damageReceiver == null)
         {
@@ -57,6 +81,23 @@ public class ShieldPlayer : MonoBehaviour
         shieldActive = true;
         shieldUntil = Time.time + durationSeconds;
 
+        if (shieldMaterial != null)
+        {
+            if (meshRenderers == null || meshRenderers.Length == 0 || originalMaterials == null || originalMaterials.Length != meshRenderers.Length)
+                CacheRenderers();
+
+            if (meshRenderers != null)
+            {
+                for (int i = 0; i < meshRenderers.Length; i++)
+                {
+                    var r = meshRenderers[i];
+                    if (r == null)
+                        continue;
+                    r.material = shieldMaterial;
+                }
+            }
+        }
+
         if (damageReceiver != null)
         {
             damageReceiver.SetInvulnerableForSeconds(durationSeconds);
@@ -67,7 +108,20 @@ public class ShieldPlayer : MonoBehaviour
     {
         shieldActive = false;
 
-        // Restaurar colisiones ignoradas durante el escudo
+        if (meshRenderers == null || originalMaterials == null || (meshRenderers != null && originalMaterials.Length != meshRenderers.Length))
+            CacheRenderers();
+
+        if (meshRenderers != null && originalMaterials != null)
+        {
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                var r = meshRenderers[i];
+                if (r == null)
+                    continue;
+                r.material = originalMaterials[i];
+            }
+        }
+
         for (int i = ignoredPairs.Count - 1; i >= 0; i--)
         {
             var pair = ignoredPairs[i];
@@ -125,8 +179,6 @@ public class ShieldPlayer : MonoBehaviour
         if (obj == null)
             return false;
 
-        // No usar CompareTag aquí porque si el tag no existe en el proyecto, Unity lanza excepción.
-        // Comparar strings no rompe aunque el tag no esté creado.
         string t = obj.tag;
         return t == enemyTagLowercase || t == enemyTagUppercase;
     }

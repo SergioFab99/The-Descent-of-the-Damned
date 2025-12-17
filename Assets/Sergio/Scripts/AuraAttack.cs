@@ -41,15 +41,26 @@ public class AuraAttack : MonoBehaviour
     private Coroutine auraRoutine;
     private GameObject vfxInstance;
     private readonly HashSet<int> uniqueTargetsThisTick = new HashSet<int>(64);
+    private Transform cameraTransform;
 
     public bool IsActive => auraActive;
     public float CooldownRemaining => Mathf.Max(0f, nextReadyTime - Time.time);
+
+    private void Start()
+    {
+        cameraTransform = Camera.main?.transform;
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(fireKey))
         {
             TryActivate();
+        }
+
+        if (auraActive)
+        {
+            UpdateVfxRotation();
         }
     }
 
@@ -101,7 +112,6 @@ public class AuraAttack : MonoBehaviour
         Vector3 center = transform.position + centerOffset;
         uniqueTargetsThisTick.Clear();
 
-        // 3D targets
         Collider[] hits3D = Physics.OverlapSphere(center, radius);
         for (int i = 0; i < hits3D.Length; i++)
         {
@@ -113,7 +123,7 @@ public class AuraAttack : MonoBehaviour
             TryAffectTarget(obj);
         }
 
-        // 2D targets (por si el enemigo usa Collider2D)
+        
         Collider2D[] hits2D = Physics2D.OverlapCircleAll(center, radius);
         for (int i = 0; i < hits2D.Length; i++)
         {
@@ -169,7 +179,6 @@ public class AuraAttack : MonoBehaviour
         if (obj == null)
             return false;
 
-        // No usar CompareTag aquí porque si el tag no existe en el proyecto, Unity lanza excepción.
         string t = obj.tag;
         return t == enemyTagLowercase || t == enemyTagUppercase;
     }
@@ -185,7 +194,39 @@ public class AuraAttack : MonoBehaviour
         {
             vfxInstance = Instantiate(auraVfxPrefab, transform);
             vfxInstance.transform.localPosition = vfxLocalOffset;
-            vfxInstance.transform.localRotation = Quaternion.Euler(vfxLocalEulerAngles);
+            UpdateVfxRotation();
+        }
+    }
+
+    private void UpdateVfxRotation()
+    {
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main?.transform;
+            if (cameraTransform == null)
+                return;
+        }
+
+        Vector3 cameraForward = cameraTransform.forward;
+        cameraForward.y = 0f;
+        
+        if (cameraForward.sqrMagnitude < 0.001f)
+        {
+            cameraForward = transform.forward;
+            cameraForward.y = 0f;
+        }
+        
+        cameraForward.Normalize();
+        Quaternion targetRotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+
+        if (vfxInstance != null)
+        {
+            vfxInstance.transform.rotation = targetRotation * Quaternion.Euler(vfxLocalEulerAngles);
+        }
+
+        if (auraParticles != null)
+        {
+            auraParticles.transform.rotation = targetRotation * Quaternion.Euler(vfxLocalEulerAngles);
         }
     }
 

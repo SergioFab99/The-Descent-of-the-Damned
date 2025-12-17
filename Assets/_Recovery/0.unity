@@ -1265,7 +1265,6 @@ MonoBehaviour:
   rotationSpeedDegreesPerSecond: 360
   projectileSpeed: 12
   projectileLifeSeconds: 6
-  projectileSpeedMultiplier: 5
 --- !u!114 &1896709327
 MonoBehaviour:
   m_ObjectHideFlags: 0
