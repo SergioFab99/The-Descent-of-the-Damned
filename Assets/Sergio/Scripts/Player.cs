@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //revisa si el jugador está en el suelo
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -28,12 +29,13 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        // establece el movimiento del jugador
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        movement = transform.TransformDirection(movement);
+        Vector3 moveDirection = Camera.main.transform.right * moveHorizontal + Camera.main.transform.forward * moveVertical;
 
-        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+        // aplica la velocidad al Rigidbody
+        rb.linearVelocity = new Vector3(moveDirection.x * speed, rb.linearVelocity.y, moveDirection.z * speed);
     }
 }
