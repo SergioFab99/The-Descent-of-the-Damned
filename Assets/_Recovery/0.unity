@@ -1255,16 +1255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b433bd3f7819384fb69fa4c585020b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateSwordsAround
-  activationKey: 120
-  toggleOnKey: 1
-  swordPrefab: {fileID: 1711349926}
-  swordPrefabs: []
-  radius: 1.5
-  heightOffset: 0
-  rotationAxis: {x: 0, y: 1, z: 0}
-  rotationSpeedDegreesPerSecond: 360
-  projectileSpeed: 12
-  projectileLifeSeconds: 6
+  claveActivacion: 120
+  prefabEspada: {fileID: 6762927862922442117, guid: fe514238743c0cf49ba13cdd4df53048, type: 3}
+  radio: 1.7
+  desplazamientoAltura: 0.2
+  velocidadRotacion: 600
+  velocidadProyectil: 50
+  vidaProyectil: 4
 --- !u!114 &1896709327
 MonoBehaviour:
   m_ObjectHideFlags: 0
