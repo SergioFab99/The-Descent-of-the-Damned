@@ -11,10 +11,10 @@ public class DemonioInfernalSkill : SkillBase
         if (demonioActual != null)
             Object.Destroy(demonioActual);
 
-            demonioActual = Object.Instantiate(
+        demonioActual = Object.Instantiate(
             demonioPrefab,
             caster.transform.position + Vector3.forward * 2f,
-            Quaternion.identity
+            Quaternion.Euler(-90, 0, 0)
         );
 
         demonioActual.GetComponent<SummonBase>().Initialize(caster);

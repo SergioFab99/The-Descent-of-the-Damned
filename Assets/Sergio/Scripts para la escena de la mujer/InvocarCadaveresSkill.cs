@@ -17,7 +17,7 @@ public class InvocarCadaveresSkill : SkillBase
             GameObject cadaver = Object.Instantiate(
                 cadaverPrefab,
                 caster.transform.position + offset,
-                Quaternion.identity
+                Quaternion.Euler(-90, 0, 0)
             );
 
             cadaver.GetComponent<SummonBase>().Initialize(caster);

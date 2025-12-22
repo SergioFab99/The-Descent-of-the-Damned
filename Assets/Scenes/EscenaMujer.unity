@@ -359,7 +359,79 @@ Transform:
   m_GameObject: {fileID: 414858319}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25340122, y: -0.000000024589694, z: 0.000000009535527, w: 0.96736133}
-  m_LocalPosition: {x: -7.48331, y: 3.69, z: -34.540802}
+  m_LocalPosition: {x: 0, y: 3.69, z: -4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &774475858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774475861}
+  - component: {fileID: 774475860}
+  - component: {fileID: 774475859}
+  m_Layer: 0
+  m_Name: AreaCaminoMuerto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &774475859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774475858}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0834084, y: 0.25252542, z: 4.2078586}
+  m_Center: {x: 0.0070165396, y: 0.12457912, z: 0}
+--- !u!114 &774475860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774475858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca311d34355d74b419ddf18053c01dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaminoMuertoArea
+  duration: 5
+  damagePerSecond: 10
+  tickRate: 0.5
+  areaRadius: 3
+  areaColor: {r: 1, g: 0.016587388, b: 0, a: 1}
+  pulseColor: {r: 0.0047626495, g: 0, b: 1, a: 1}
+--- !u!4 &774475861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774475858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -476,7 +548,7 @@ Transform:
   m_GameObject: {fileID: 809858844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.48331, y: 1.44, z: -30.5408}
+  m_LocalPosition: {x: 0, y: 1.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -538,15 +610,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillController
   invocarCadaveres:
     cooldown: 0
-    cadaverPrefab: {fileID: 0}
+    cadaverPrefab: {fileID: 1808404867447100074, guid: 6ad92020228750047977c3650036ddd8, type: 3}
     cantidad: 5
     radio: 2
   caminoMuerto:
     cooldown: 0
-    areaPrefab: {fileID: 0}
+    areaPrefab: {fileID: 774475858}
+    areaRadius: 3
+    areaDuration: 5
+    gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
+    wireColor: {r: 1, g: 0, b: 0, a: 1}
+    showGizmos: 1
+    showWireframe: 1
   demonioInfernal:
     cooldown: 0
-    demonioPrefab: {fileID: 0}
+    demonioPrefab: {fileID: 8215258477953464243, guid: 91c000d27689d3c4a86e83b07ef87776, type: 3}
 --- !u!1 &955503110
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +712,7 @@ Transform:
   m_GameObject: {fileID: 955503110}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25340122, y: -0.000000023719444, z: 0.0000000062133316, w: 0.9673613}
-  m_LocalPosition: {x: -7.48331, y: 3.69, z: -34.540802}
+  m_LocalPosition: {x: 0, y: 3.69, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -921,3 +999,4 @@ SceneRoots:
   - {fileID: 1411912287}
   - {fileID: 809858848}
   - {fileID: 414858325}
+  - {fileID: 774475861}
