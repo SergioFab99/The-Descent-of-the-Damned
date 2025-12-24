@@ -374,7 +374,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774475861}
-  - component: {fileID: 774475860}
   - component: {fileID: 774475859}
   m_Layer: 0
   m_Name: AreaCaminoMuerto
@@ -404,24 +403,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.0834084, y: 0.25252542, z: 4.2078586}
   m_Center: {x: 0.0070165396, y: 0.12457912, z: 0}
---- !u!114 &774475860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774475858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca311d34355d74b419ddf18053c01dcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaminoMuertoArea
-  duration: 5
-  damagePerSecond: 10
-  tickRate: 0.5
-  areaRadius: 3
-  areaColor: {r: 1, g: 0.016587388, b: 0, a: 1}
-  pulseColor: {r: 0.0047626495, g: 0, b: 1, a: 1}
 --- !u!4 &774475861
 Transform:
   m_ObjectHideFlags: 0
@@ -446,15 +427,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 809858848}
-  - component: {fileID: 809858851}
   - component: {fileID: 809858847}
+  - component: {fileID: 809858855}
+  - component: {fileID: 809858854}
+  - component: {fileID: 809858853}
+  - component: {fileID: 809858852}
   - component: {fileID: 809858846}
   - component: {fileID: 809858845}
   - component: {fileID: 809858849}
   - component: {fileID: 809858850}
   m_Layer: 0
   m_Name: Girl
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -568,7 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   speed: 5
   jumpForce: 5
-  groundCheckDistance: 0.6
+  groundCheckDistance: 1
 --- !u!54 &809858850
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -596,7 +580,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &809858851
+--- !u!114 &809858852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -605,26 +589,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 809858844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c438b8a3778af44b8697f86a572ab5a, type: 3}
+  m_Script: {fileID: 11500000, guid: b3542111c6fe5024c81a26fe9227ce2a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillController
-  invocarCadaveres:
-    cooldown: 0
-    cadaverPrefab: {fileID: 1808404867447100074, guid: 6ad92020228750047977c3650036ddd8, type: 3}
-    cantidad: 5
-    radio: 2
-  caminoMuerto:
-    cooldown: 0
-    areaPrefab: {fileID: 774475858}
-    areaRadius: 3
-    areaDuration: 5
-    gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
-    wireColor: {r: 1, g: 0, b: 0, a: 1}
-    showGizmos: 1
-    showWireframe: 1
-  demonioInfernal:
-    cooldown: 0
-    demonioPrefab: {fileID: 8215258477953464243, guid: 91c000d27689d3c4a86e83b07ef87776, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  abilityQ: {fileID: 809858853}
+  abilityE: {fileID: 809858854}
+  abilityX: {fileID: 809858855}
+--- !u!114 &809858853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809858844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efcaf06cc685ef4bad1de86e2a51282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoisonTrailAbility
+  spawnInterval: 0.15
+  trailSize: 0.5
+  trailColor: {r: 1, g: 0.1297385, b: 0, a: 1}
+--- !u!114 &809858854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809858844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9aa094b03344c4593d6f0edcd02578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CorpseSummonAbility
+  summonPrefab: {fileID: 1808404867447100074, guid: 6ad92020228750047977c3650036ddd8, type: 3}
+  summonCount: 1
+  summonRadius: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 17
+--- !u!114 &809858855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809858844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16821b7fb565dd048adef995ef2d6bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DemonSummonAbility
+  summonPrefab: {fileID: 8215258477953464243, guid: 91c000d27689d3c4a86e83b07ef87776, type: 3}
+  summonCount: 1
+  summonRadius: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 17
 --- !u!1 &955503110
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +783,7 @@ GameObject:
   - component: {fileID: 1411912286}
   - component: {fileID: 1411912285}
   - component: {fileID: 1411912284}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Plane
   m_TagString: Ground
   m_Icon: {fileID: 0}
