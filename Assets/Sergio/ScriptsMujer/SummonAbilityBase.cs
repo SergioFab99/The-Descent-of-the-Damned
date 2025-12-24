@@ -52,5 +52,7 @@ public abstract class SummonAbilityBase : AbilityBase
             rb.isKinematic = false;
             rb.useGravity = true;
         }
+
+        Destroy(obj, 10f);
     }
 }

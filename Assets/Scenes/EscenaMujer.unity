@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 414858324}
   - component: {fileID: 414858323}
   - component: {fileID: 414858322}
-  - component: {fileID: 414858321}
   - component: {fileID: 414858320}
   m_Layer: 0
   m_Name: FreeLook Camera
@@ -198,23 +197,6 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
---- !u!114 &414858321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414858319}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFreeLookModifier
-  Easing: 0
-  Modifiers: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &414858322
 MonoBehaviour:
   m_ObjectHideFlags: 0

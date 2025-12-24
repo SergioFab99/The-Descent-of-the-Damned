@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cb06ad0001903df4b8c689a0efb5d1a8, type: 2}
     - target: {fileID: 919132149155446097, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
       propertyPath: m_Name
       value: cadaver
