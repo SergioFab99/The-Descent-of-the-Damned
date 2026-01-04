@@ -66,36 +66,36 @@ public class TMPCrackHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointer
 
             float dir = Random.Range(-1f, 1f);
 
-            Vector3 topOffset = new Vector3(
+                Vector3 topOffset = new Vector3(
                 Random.Range(-jitterStrength, jitterStrength),
                 crackStrength * dir,
                 0);
 
-            Vector3 bottomOffset = new Vector3(
+                Vector3 bottomOffset = new Vector3(
                 Random.Range(-jitterStrength, jitterStrength),
                 -crackStrength * dir,
                 0);
 
-            textInfo.meshInfo[matIndex].vertices[vertIndex + 0] =
+                textInfo.meshInfo[matIndex].vertices[vertIndex + 0] =
                 originalMesh[matIndex].vertices[vertIndex + 0] + bottomOffset;
-            textInfo.meshInfo[matIndex].vertices[vertIndex + 3] =
+                textInfo.meshInfo[matIndex].vertices[vertIndex + 3] =
                 originalMesh[matIndex].vertices[vertIndex + 3] + bottomOffset;
 
-            textInfo.meshInfo[matIndex].vertices[vertIndex + 1] =
+                textInfo.meshInfo[matIndex].vertices[vertIndex + 1] =
                 originalMesh[matIndex].vertices[vertIndex + 1] + topOffset;
-            textInfo.meshInfo[matIndex].vertices[vertIndex + 2] =
+                textInfo.meshInfo[matIndex].vertices[vertIndex + 2] =
                 originalMesh[matIndex].vertices[vertIndex + 2] + topOffset;
 
-            float noise = Mathf.PerlinNoise(i * 0.4f, time);
+                float noise = Mathf.PerlinNoise(i * 0.4f, time);
 
-            Color fireColor = Color.Lerp(midColor, hotColor, noise);
-            fireColor = Color.Lerp(fireColor, burnColor, burnAmount + Random.Range(0f, 0.2f));
+                Color fireColor = Color.Lerp(midColor, hotColor, noise);
+                fireColor = Color.Lerp(fireColor, burnColor, burnAmount + Random.Range(0f, 0.2f));
 
-            for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 4; j++)
                 textInfo.meshInfo[matIndex].colors32[vertIndex + j] = fireColor;
         }
 
-        textMesh.UpdateVertexData(
+            textMesh.UpdateVertexData(
             TMP_VertexDataUpdateFlags.Vertices |
             TMP_VertexDataUpdateFlags.Colors32
         );

@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public abstract class SummonAbilityBase : AbilityBase
 {
@@ -8,9 +9,14 @@ public abstract class SummonAbilityBase : AbilityBase
     public float summonRadius = 2f;
     public LayerMask groundLayer;
 
+    [SerializeField] protected Transform chaseTarget;
+
     protected void Summon()
     {
         if (!summonPrefab) return;
+
+        if (chaseTarget == null)
+            chaseTarget = transform;
 
         float angleStep = 360f / summonCount;
         Vector3 center = transform.position;
@@ -18,7 +24,7 @@ public abstract class SummonAbilityBase : AbilityBase
         for (int i = 0; i < summonCount; i++)
         {
             float angle = i * angleStep * Mathf.Deg2Rad;
-            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f,Mathf.Sin(angle)) * summonRadius;
+            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * summonRadius;
             Vector3 rayOrigin = center + offset + Vector3.up * 10f;
             if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 50f, groundLayer))
             {
@@ -29,7 +35,12 @@ public abstract class SummonAbilityBase : AbilityBase
 
     private IEnumerator SpawnSafely(Vector3 groundPoint)
     {
-        GameObject obj = Instantiate(summonPrefab,groundPoint + Vector3.up * 3f,Quaternion.Euler(-90f, 0f, 0f));
+        GameObject obj = Instantiate(summonPrefab, groundPoint + Vector3.up * 3f, Quaternion.Euler(-90f, 0f, 0f));
+
+        NavMeshAgent agent = obj.GetComponent<NavMeshAgent>();
+        if (agent)
+            agent.enabled = false;
+
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         Collider col = obj.GetComponentInChildren<Collider>();
         if (rb)
@@ -46,6 +57,10 @@ public abstract class SummonAbilityBase : AbilityBase
         {
             obj.transform.position = groundPoint;
         }
+
+        SummonChaseBehaviour chase = obj.GetComponent<SummonChaseBehaviour>();
+        if (chase != null)
+            chase.Initialize(chaseTarget);
 
         if (rb)
         {

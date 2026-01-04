@@ -1139,9 +1139,21 @@ PrefabInstance:
       value: Man
       objectReference: {fileID: 0}
     - target: {fileID: 8722580354518776694, guid: dcf31b4c270d8ae43b1da289348c5e1b, type: 3}
+      propertyPath: radio
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722580354518776694, guid: dcf31b4c270d8ae43b1da289348c5e1b, type: 3}
       propertyPath: prefabEspada
       value: 
       objectReference: {fileID: 6762927862922442117, guid: fe514238743c0cf49ba13cdd4df53048, type: 3}
+    - target: {fileID: 8722580354518776694, guid: dcf31b4c270d8ae43b1da289348c5e1b, type: 3}
+      propertyPath: velocidadRotacion
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722580354518776694, guid: dcf31b4c270d8ae43b1da289348c5e1b, type: 3}
+      propertyPath: desplazamientoAltura
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
