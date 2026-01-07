@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class SummonChaseBehaviour : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SummonChaseBehaviour : MonoBehaviour
     [SerializeField] private float rotationSpeed = 720f;
     [SerializeField] private float stopDistance = 1.25f;
     [SerializeField] private float yawOffset = 0f;
+    [SerializeField] private NavMeshAgent agent;
 
     private Transform target;
     private bool canChase;
@@ -21,9 +23,11 @@ public class SummonChaseBehaviour : MonoBehaviour
 
     public void Initialize(Transform targetToChase)
     {
+        agent=GetComponent<NavMeshAgent>();
+        
         target = targetToChase;
-        rotationOffset = transform.rotation;
-        StartCoroutine(StartChaseAfterDelay());
+        //rotationOffset = transform.rotation;
+        
     }
 
     private IEnumerator StartChaseAfterDelay()
@@ -35,6 +39,16 @@ public class SummonChaseBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (agent == null) return;
+        agent.enabled = true;
+        if (agent.isOnNavMesh)
+        {
+            agent.SetDestination(target.position);
+            StartCoroutine(StartChaseAfterDelay());
+            return;
+        }
+        
+        return;
         if (!canChase || target == null) return;
 
         Vector3 toTarget = target.position - transform.position;

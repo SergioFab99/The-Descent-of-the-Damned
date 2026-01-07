@@ -78,9 +78,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7273212708244282137}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5169412407898885422}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
       insertIndex: -1
@@ -91,22 +88,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e3fc239ac3bfdf142ad5873a5f09ab02, type: 3}
   m_PrefabInstance: {fileID: 1574526440681549819}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7273212708244282137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808404867447100074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0429b3dee889e843af393ce2466cbab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SummonChaseBehaviour
-  chaseDelay: 1
-  moveSpeed: 3.5
-  rotationSpeed: 720
-  stopDistance: 1.25
 --- !u!54 &5169412407898885422
 Rigidbody:
   m_ObjectHideFlags: 0
